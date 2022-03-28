@@ -1,0 +1,119 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.testmobile.githubuserslist"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*'
+        exclude("META-INF/*.kotlin_module")
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+hilt {
+    enableTransformForLocalTests = true
+}
+
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:$ktxVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
+
+    // Retrofit + GSON
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // material design components
+    implementation "com.google.android.material:material:$materialDesignComponentsVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    // Paging 3
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+    // dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // avatar image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // web view
+    implementation 'com.thefinestartist:finestwebview:1.2.7'
+
+    // for instrumented tests
+    androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$testJunitVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+
+    // testing
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
+    testImplementation "android.arch.core:core-testing:$coreTestingVerssion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinTestJunitVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVerions"
+}
